@@ -1,0 +1,40 @@
+{
+	"name": "diecoding/yii2-pdfjs",
+	"description": "Yii2 Previewer PDF File with PDF.js (https://github.com/mozilla/pdf.js) plugin ",
+	"type": "yii2-widget",
+	"keywords": [
+		"yii2",
+		"widget",
+		"pdfjs",
+		"previewer",
+		"jquery"
+	],
+	"license": "BSD-3-Clause",
+	"support": {
+		"issues": "https://github.com/die-coding/yii2-pdfjs/issues",
+		"source": "https://github.com/die-coding/yii2-pdfjs"
+	},
+	"require": {
+		"php": ">=7.0",
+		"yiisoft/yii2": "~2.0",
+		"bower-asset/pdfjs": "^2.1"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "<7"
+	},
+	"autoload": {
+		"psr-4": {
+			"diecoding\\pdfjs\\": "src"
+		}
+	},
+	"authors": [
+		{
+			"name": "Die Coding",
+			"email": "diecoding@gmail.com"
+		},
+		{
+			"name": "Sugeng Sulistiyawan",
+			"email": "sugeng.sulistiyawan@gmail.com"
+		}
+	]
+}
