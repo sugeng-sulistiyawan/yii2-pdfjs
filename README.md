@@ -87,7 +87,6 @@ Modal::end();
 
 ```
 
-
 -   Cara Direct Url
 ```php
 <?php
@@ -118,9 +117,7 @@ use yii\helpers\Url;
         "height"      => "360",
         "frameborder" => "0",
     ]
-]);
-
-?>
+]); ?>
 
 ```
 
@@ -134,19 +131,18 @@ use yii\helpers\Url;
 ?>
 
 <?php echo PdfJs::widget([
-  "url"     => Url::to(["/uploads/File.pdf"], true),
-  "buttons"=>[
-    "presentationMode" => false,
-    "openFile" => false,
-    "print" => true,
-    "download" => true,
-    "viewBookmark" => false,
-    "secondaryToolbarToggle" => false
-  ]
-]);
-?>
-```
+    "url"     => Url::to(["/uploads/File.pdf"], true),
+    "buttons" => [
+        "presentationMode"       => false,
+        "openFile"               => false,
+        "print"                  => false,
+        "download"               => false,
+        "viewBookmark"           => false,
+        "secondaryToolbarToggle" => false
+    ]
+]); ?>
 
+```
 
 -   Cara Tambah Watermark
 ```php
