@@ -18,51 +18,51 @@ use yii\helpers\ArrayHelper;
  */
 class PdfJs extends \yii\base\Widget
 {
-  /**
-   *
-   * @var string $url
-   */
-  public $url;
+	/**
+	 *
+	 * @var string $url
+	 */
+	public $url;
 
-  /**
-   *
-   * @var array $options
-   */
-  public $options = [];
+	/**
+	 *
+	 * @var array $options
+	 */
+	public $options = [];
 
-  /**
-   *
-   * @var array $buttons
-   */
-  public $buttons = [];
+	/**
+	 *
+	 * @var array $buttons
+	 */
+	public $buttons = [];
 
-  /**
-   * @inheritdoc
-   */
-  public function init()
-  {
-    parent::init();
-    $this->view->registerAssetBundle(PdfJsAsset::className());
+	/**
+	 * @inheritdoc
+	 */
+	public function init()
+	{
+		parent::init();
+		$this->view->registerAssetBundle(PdfJsAsset::className());
 
-    $module        = new Module();
-    $buttons       = $module->buttons;
-    $this->buttons = ArrayHelper::merge($buttons, $this->buttons);
-  }
+		$module        = Yii::$app->getModule('pdfjs');
+		$buttons       = $module->buttons;
+		$this->buttons = ArrayHelper::merge($buttons, $this->buttons);
+	}
 
-  /**
-   * @inheritdoc
-   */
-  public function run()
-  {
-    if (!array_key_exists('style', $this->options)) {
-      $this->options['style'] = 'border:solid 2px #404040; width:' . $this->width . '; height:' . $this->height . ';';
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function run()
+	{
+		if (!array_key_exists('style', $this->options)) {
+			$this->options['style'] = 'border:solid 2px #404040; width:' . $this->width . '; height:' . $this->height . ';';
+		}
 
-    return $this->render('viewer', [
-      'options' => $this->options,
-      'url'     => $this->url,
-      'buttons' => $this->buttons,
-      'id'      => $this->id
-    ]);
-  }
+		return $this->render('viewer', [
+			'options' => $this->options,
+			'url'     => $this->url,
+			'buttons' => $this->buttons,
+			'id'      => $this->id
+		]);
+	}
 }

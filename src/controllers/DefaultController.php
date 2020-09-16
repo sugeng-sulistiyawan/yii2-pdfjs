@@ -2,7 +2,6 @@
 
 namespace diecoding\pdfjs\controllers;
 
-use diecoding\pdfjs\Module;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -29,7 +28,7 @@ class DefaultController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$module    = new Module();
+		$module    = Yii::$app->getModule('pdfjs');
 		$buttons   = $module->buttons;
 		$waterMark = $module->waterMark;
 		if (Yii::$app->request->isPost) {
