@@ -5,13 +5,11 @@ namespace diecoding\pdfjs;
 use yii\helpers\ArrayHelper;
 
 /**
- * @inheritdoc
+ * PdfJs Module.
  * 
- * @author Die Coding (Sugeng Sulistiyawan) <diecoding@gmail.com>
- * @copyright 2020 Die Coding
- * @license MIT
- * @link https://www.diecoding.com
- * @version 1.0.0
+ * @link [sugeng-sulistiyawan.github.io](sugeng-sulistiyawan.github.io)
+ * @author Sugeng Sulistiyawan <sugeng.sulistiyawan@gmail.com>
+ * @copyright Copyright (c) 2023
  */
 class Module extends \yii\base\Module
 {

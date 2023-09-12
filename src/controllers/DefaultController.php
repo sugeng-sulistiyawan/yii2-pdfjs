@@ -28,20 +28,21 @@ class DefaultController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$module    = Yii::$app->getModule('pdfjs');
+		/** @var \diecoding\pdfjs\Module $module */
+		$module    = $this->module;
 		$buttons   = $module->buttons;
 		$waterMark = $module->waterMark;
 		if (Yii::$app->request->isPost) {
 
-			$widgitButtonConfig = Yii::$app->request->post();
+			$widgetButtonConfig = Yii::$app->request->post();
 			if (isset(Yii::$app->request->csrfParam)) {
-				unset($widgitButtonConfig[Yii::$app->request->csrfParam]);
+				unset($widgetButtonConfig[Yii::$app->request->csrfParam]);
 			}
 
-			foreach ($widgitButtonConfig as $key => $value) {
-				$widgitButtonConfig[$key] = trim($value) == '0' ? false : true;
+			foreach ($widgetButtonConfig as $key => $value) {
+				$widgetButtonConfig[$key] = trim($value) == '0' ? false : true;
 			}
-			$buttons = ArrayHelper::merge($buttons, $widgitButtonConfig);
+			$buttons = ArrayHelper::merge($buttons, $widgetButtonConfig);
 		}
 
 		return $this->render('index', [

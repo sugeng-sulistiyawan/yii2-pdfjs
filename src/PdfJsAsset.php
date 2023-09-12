@@ -3,43 +3,38 @@
 namespace diecoding\pdfjs;
 
 use yii\web\AssetBundle;
-use yii\web\View;
 
 /**
- * @inheritdoc
+ * PdfJsAsset represents a collection of asset files, such as CSS, JS, images.
  * 
- * @author Die Coding (Sugeng Sulistiyawan) <diecoding@gmail.com>
- * @copyright 2020 Die Coding
- * @license MIT
- * @link https://www.diecoding.com
- * @version 1.0.0
+ * @link [sugeng-sulistiyawan.github.io](sugeng-sulistiyawan.github.io)
+ * @author Sugeng Sulistiyawan <sugeng.sulistiyawan@gmail.com>
+ * @copyright Copyright (c) 2023
  */
 class PdfJsAsset extends AssetBundle
 {
-
     /**
-     * @var string $sourcePath
+     * @var string
      */
-    public $sourcePath = '@bower/pdfjs-dist';
+    public $sourcePath = '@bower/pdfjs-dist/web';
 
     /**
-     * @var array $css
+     * @var array
      */
     public $css = [
         'web/pdf_viewer.css',
     ];
 
     /**
-     * @var array $js
+     * @var array
      */
     public $js = [
         'build/pdf.min.js',
-        // 'build/pdf.worker.min.js',
         'web/pdf_viewer.js',
     ];
 
     /**
-     * @var array $depends
+     * @var array
      */
     public $depends = [
         'yii\web\YiiAsset',
@@ -48,7 +43,10 @@ class PdfJsAsset extends AssetBundle
     /**
      * @var array $jsOptions
      */
-    public $jsOptions  = [
-        'position' => View::POS_HEAD
+    public $publishOptions  = [
+        'only' => [
+            'build',
+            'web',
+        ]
     ];
 }
