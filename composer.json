@@ -21,7 +21,7 @@
 		"source": "https://github.com/sugeng-sulistiyawan/yii2-pdfjs"
 	},
 	"require": {
-		"php": ">=7.0",
+		"php": ">=7.4",
 		"yiisoft/yii2": "~2.0",
 		"npm-asset/pdfjs-dist": "^3.10"
 	},

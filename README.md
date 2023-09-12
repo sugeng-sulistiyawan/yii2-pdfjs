@@ -44,7 +44,7 @@ or add to the require section of your `composer.json` file.
 
 ## Dependencies
 
-- PHP 7.0+
+- PHP 7.4+
 - [yiisoft/yii2](https://github.com/yiisoft/yii2)
 - [npm-asset/pdfjs-dist](https://asset-packagist.org/package/npm-asset/pdfjs-dist)
 
