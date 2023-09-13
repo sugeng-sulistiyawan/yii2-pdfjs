@@ -22,11 +22,6 @@ class Module extends \yii\base\Module
 	public $buttons = [];
 
 	/**
-	 * @var array
-	 */
-	public $waterMark = [];
-
-	/**
 	 * @inheritdoc
 	 */
 	public $controllerNamespace = 'diecoding\pdfjs\controllers';
@@ -48,13 +43,5 @@ class Module extends \yii\base\Module
 		];
 
 		$this->buttons   = array_merge($buttonsDefault, $this->buttons);
-
-		$waterMarkDefault = [
-			'text'  => '',
-			'alpha' => '0.5',
-			'color' => 'red'
-		];
-
-		$this->waterMark = array_merge($waterMarkDefault, $this->waterMark);
 	}
 }

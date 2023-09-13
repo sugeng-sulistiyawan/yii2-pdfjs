@@ -27,10 +27,9 @@ class DefaultController extends Controller
 	public function actionIndex()
 	{
 		/** @var \diecoding\pdfjs\Module $module */
-		$module    = $this->module;
-		$title     = $module->title;
-		$buttons   = $module->buttons;
-		$waterMark = $module->waterMark;
+		$module  = $this->module;
+		$title   = $module->title;
+		$buttons = $module->buttons;
 		if (Yii::$app->request->getIsPost()) {
 
 			$widgetButtonConfig = Yii::$app->request->post();
@@ -45,9 +44,8 @@ class DefaultController extends Controller
 		}
 
 		return $this->render('index', [
-			'title'     => $title,
-			'buttons'   => $buttons,
-			'waterMark' => $waterMark,
+			'title'   => $title,
+			'buttons' => $buttons,
 		]);
 	}
 }
