@@ -10,7 +10,7 @@ Previewer PDF File with PDF.js for Yii2
 [![License](https://img.shields.io/github/license/sugeng-sulistiyawan/yii2-pdfjs)](https://github.com/sugeng-sulistiyawan/yii2-pdfjs)
 [![PHP Version Require](https://img.shields.io/packagist/dependency-v/diecoding/yii2-pdfjs/php?color=6f73a6)](https://packagist.org/packages/diecoding/yii2-pdfjs)
 
-> Yii2 PDF.js uses [PDF.js](https://mozilla.github.io/pdf.js/) <br> Demo: https://mozilla.github.io/pdf.js/web/viewer.html
+> Yii2 PDF.js uses [PDF.js](https://mozilla.github.io/pdf.js/) <br> Demo: <https://mozilla.github.io/pdf.js/web/viewer.html>
 
 ## Table of Contents
 
@@ -26,7 +26,6 @@ Previewer PDF File with PDF.js for Yii2
       - [Direct Url](#direct-url)
       - [Custom Attribute](#custom-attribute)
       - [Disable Toolbar](#disable-toolbar)
-      - [Add Watermark](#add-watermark)
 
 ## Instalation
 
@@ -160,24 +159,5 @@ use yii\helpers\Url;
         'secondaryToolbarToggle' => false
     ]
 ]); ?>
-
-```
-
-#### Add Watermark
-
-```php
-...
-
-'modules'=>[
-  'pdfjs' => [
-       'class'     => \diecoding\pdfjs\Module::class,
-       'waterMark' => [
-            'text'  => 'Yii2 PDF.js',
-            'color' => 'blue',
-            'alpha' => '0.3',
-       ]
-   ],
-],
-...
 
 ```
