@@ -129,11 +129,9 @@ use yii\helpers\Url;
 ?>
 
 <?php echo PdfJs::widget([
-    'url'     => '@web/uploads/dummy.pdf',
-    'options' => [
-        'width'  => '100%',
-        'height' => '360',
-    ]
+    'url'    => '@web/uploads/dummy.pdf',
+    'width'  => '100%',
+    'height' => '360',
 ]); ?>
 
 ```
