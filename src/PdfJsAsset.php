@@ -24,7 +24,6 @@ class PdfJsAsset extends AssetBundle
      * @var array
      */
     public $css = [
-        'web/debugger.css',
         'web/viewer.css',
     ];
 
@@ -34,7 +33,6 @@ class PdfJsAsset extends AssetBundle
     public $js = [
         'build/pdf.js',
         'build/pdf.worker.js',
-        // 'web/debugger.js',
         'web/viewer.js'
     ];
 
@@ -50,16 +48,5 @@ class PdfJsAsset extends AssetBundle
      */
     public $depends = [
         'yii\web\YiiAsset',
-    ];
-
-    /**
-     * @var array
-     */
-    public $publishOptions  = [
-        // 'only' => [
-        //     'build',
-        //     'web',
-        // ],
-        // 'forceCopy' => true,
     ];
 }

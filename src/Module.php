@@ -17,9 +17,23 @@ class Module extends \yii\base\Module
 	public $title = 'PDF.js viewer';
 
 	/**
+	 * Show or hide section container
+	 * 
 	 * @var array
 	 */
-	public $buttons = [];
+	public $sections = [];
+
+	/**
+	 * Show or hide section container
+	 * 
+	 * @var array
+	 */
+	private $_defaultSections = [
+		'presentationMode'       => true,
+		'print'                  => true,
+		'download'               => true,
+		'secondaryToolbarToggle' => true,
+	];
 
 	/**
 	 * @inheritdoc
@@ -33,15 +47,6 @@ class Module extends \yii\base\Module
 	{
 		parent::init();
 
-		$buttonsDefault = [
-			'presentationMode'       => true,
-			'openFile'               => true,
-			'print'                  => true,
-			'download'               => true,
-			'viewBookmark'           => true,
-			'secondaryToolbarToggle' => true,
-		];
-
-		$this->buttons   = array_merge($buttonsDefault, $this->buttons);
+		$this->sections = array_merge($this->_defaultSections, $this->sections);
 	}
 }

@@ -8,9 +8,9 @@ use yii\web\View;
 $this->title = $title;
 
 $js = '';
-foreach ($buttons as $btn => $value) {
-	if ($value === false) {
-		$js .= "$('#{$btn}').hide();\n";
+foreach ($sections as $sectionId => $show) {
+	if (!$show) {
+		$js .= "$('#{$sectionId}').hide();\n";
 	}
 }
 

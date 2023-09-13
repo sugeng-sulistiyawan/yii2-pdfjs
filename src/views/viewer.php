@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 /** @var string $moduleId */
 /** @var string $url */
 /** @var array $options */
-/** @var array $buttons */
+/** @var array $sections */
 
 $url = Url::to(["/{$moduleId}", 'file' => Url::to($url, true)], true);
 
@@ -22,13 +22,12 @@ $form = ActiveForm::begin([
 	'id'      => "{$moduleId}-form-{$id}",
 	'action'  => $url,
 	'options' => [
-		'class'  => 'form-horizontal',
 		'target' => "{$moduleId}-{$id}",
 	],
 ]);
 
-foreach ($buttons as $btn => $value) {
-	echo $value == false ? Html::hiddenInput($btn, 0) : null;
+foreach ($sections as $sectionId => $show) {
+	echo $show ? '' : Html::hiddenInput($sectionId, 0);
 }
 
 ActiveForm::end();

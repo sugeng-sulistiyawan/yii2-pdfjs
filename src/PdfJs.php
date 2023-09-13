@@ -37,7 +37,7 @@ class PdfJs extends Widget
 	/**
 	 * @var string
 	 */
-	public $background = '#404040';
+	public $background = 'rgba(212, 212, 215, 1)';
 
 	/**
 	 * @var array
@@ -45,9 +45,11 @@ class PdfJs extends Widget
 	public $options = [];
 
 	/**
+	 * Show or hide section container
+	 * 
 	 * @var array
 	 */
-	public $buttons = [];
+	public $sections = [];
 
 	/**
 	 * @inheritdoc
@@ -57,9 +59,9 @@ class PdfJs extends Widget
 		parent::init();
 
 		/** @var Module $module */
-		$module        = Yii::$app->getModule($this->moduleId);
-		$buttons       = $module->buttons;
-		$this->buttons = array_merge($buttons, $this->buttons);
+		$module         = Yii::$app->getModule($this->moduleId);
+		$sections       = $module->sections;
+		$this->sections = array_merge($sections, $this->sections);
 	}
 
 	/**
@@ -67,7 +69,7 @@ class PdfJs extends Widget
 	 */
 	public function run()
 	{
-		if (!array_key_exists('style', $this->options)) {
+		if (!isset($this->options['style'])) {
 			$this->options['style']['background-color'] = $this->background;
 			$this->options['style']['width']            = $this->width;
 			$this->options['style']['height']           = $this->height;
@@ -78,7 +80,7 @@ class PdfJs extends Widget
 			'moduleId' => $this->moduleId,
 			'url'      => $this->url,
 			'options'  => $this->options,
-			'buttons'  => $this->buttons,
+			'sections' => $this->sections,
 		]);
 	}
 }

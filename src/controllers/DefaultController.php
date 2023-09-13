@@ -27,26 +27,25 @@ class DefaultController extends Controller
 	public function actionIndex()
 	{
 		/** @var \diecoding\pdfjs\Module $module */
-		$module  = $this->module;
-		$title   = $module->title;
-		$buttons = $module->buttons;
+		$module   = $this->module;
+		$title    = $module->title;
+		$sections = $module->sections;
 		if (Yii::$app->request->getIsPost()) {
-
-			/** @var array $widgetButtonConfig */
-			$widgetButtonConfig = Yii::$app->request->post();
-			if (isset($widgetButtonConfig[Yii::$app->request->csrfParam])) {
-				unset($widgetButtonConfig[Yii::$app->request->csrfParam]);
+			/** @var array $widgetSections */
+			$widgetSections = Yii::$app->request->post();
+			if (isset($widgetSections[Yii::$app->request->csrfParam])) {
+				unset($widgetSections[Yii::$app->request->csrfParam]);
 			}
 
-			foreach ($widgetButtonConfig as $key => $value) {
-				$widgetButtonConfig[$key] = trim($value) == '0' ? false : true;
+			foreach ($widgetSections as $sectionId => $show) {
+				$widgetSections[$sectionId] = $show != 0;
 			}
-			$buttons = array_merge($buttons, $widgetButtonConfig);
+			$sections = array_merge($sections, $widgetSections);
 		}
 
 		return $this->render('index', [
-			'title'   => $title,
-			'buttons' => $buttons,
+			'title'    => $title,
+			'sections' => $sections,
 		]);
 	}
 }

@@ -22,10 +22,9 @@ Previewer PDF File with PDF.js for Yii2
     - [Setup Module](#setup-module)
     - [Views](#views)
       - [Basic Usage](#basic-usage)
-      - [Basic Usage with Modal](#basic-usage-with-modal)
       - [Direct Url](#direct-url)
       - [Custom Attribute](#custom-attribute)
-      - [Disable Toolbar](#disable-toolbar)
+      - [Disable Toolbar Section](#disable-toolbar-section)
 
 ## Instalation
 
@@ -43,7 +42,7 @@ or add to the require section of your `composer.json` file.
 
 ## Dependencies
 
-- PHP 7.4+
+- PHP 7.2+
 - [yiisoft/yii2](https://github.com/yiisoft/yii2)
 
 ## Usage
@@ -52,7 +51,6 @@ or add to the require section of your `composer.json` file.
 
 ```php
 ...
-
 'modules'=>[
   'pdfjs' => [
        'class' => \diecoding\pdfjs\Module::class,
@@ -67,95 +65,34 @@ or add to the require section of your `composer.json` file.
 #### Basic Usage
 
 ```php
-<?php
-
-use diecoding\pdfjs\PdfJs;
-use yii\helpers\Url;
-
-?>
-
-<?php echo PdfJs::widget([
-    'url' => '@web/uploads/dummy.pdf',
-]); ?>
-
-```
-
-#### Basic Usage with Modal
-
-```php
-<?php
-
-use diecoding\pdfjs\PdfJs;
-use yii\bootstrap\Modal;
-use yii\helpers\Url;
-
-Modal::begin([
-    'header'       => '<h2>Hello, World!</h2>',
-    'toggleButton' => ['label' => 'Lihat File'],
-]);
-
-echo PdfJs::widget([
+echo \diecoding\pdfjs\PdfJs::widget([
     'url' => '@web/uploads/dummy.pdf',
 ]);
-
-Modal::end();
-
-?>
-
 ```
 
 #### Direct Url
 
 ```php
-<?php
-
-use yii\helpers\Url;
-
-?>
-
-<?php echo Url::to(["/pdfjs", 'file' => Url::to('@web/uploads/dummy.pdf', true)], true) ?>
-
-?>
+echo Url::to(["/pdfjs", 'file' => Url::to('@web/uploads/dummy.pdf', true)], true);
 ```
 
 #### Custom Attribute
 
 ```php
-<?php
-
-use diecoding\pdfjs\PdfJs;
-use yii\helpers\Url;
-
-?>
-
-<?php echo PdfJs::widget([
+echo \diecoding\pdfjs\PdfJs::widget([
     'url'    => '@web/uploads/dummy.pdf',
     'width'  => '100%',
-    'height' => '360',
-]); ?>
-
+    'height' => '500px',
+]);
 ```
 
-#### Disable Toolbar
+#### Disable Toolbar Section
 
 ```php
-<?php
-
-use diecoding\pdfjs\PdfJs;
-use yii\helpers\Url;
-
-?>
-
-<?php echo PdfJs::widget([
-    'url'     => Url::to(['/uploads/File.pdf'], true),
-    'buttons' => [
-        'presentationMode'       => false,
-        'openFile'               => false,
-        'print'                  => false,
-        'download'               => false,
-        'viewBookmark'           => false,
-        'secondaryToolbarToggle' => false
-    ]
-]); ?>
-
+echo \diecoding\pdfjs\PdfJs::widget([
+    'url'      => '@web/uploads/dummy.pdf',
+    'sections' => [
+        'toolbarContainer' => false,
+    ],
+]);
 ```
