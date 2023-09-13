@@ -32,8 +32,9 @@ class DefaultController extends Controller
 		$buttons = $module->buttons;
 		if (Yii::$app->request->getIsPost()) {
 
+			/** @var array $widgetButtonConfig */
 			$widgetButtonConfig = Yii::$app->request->post();
-			if (isset(Yii::$app->request->csrfParam)) {
+			if (isset($widgetButtonConfig[Yii::$app->request->csrfParam])) {
 				unset($widgetButtonConfig[Yii::$app->request->csrfParam]);
 			}
 
