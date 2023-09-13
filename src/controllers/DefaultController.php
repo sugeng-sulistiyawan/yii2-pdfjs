@@ -3,17 +3,14 @@
 namespace diecoding\pdfjs\controllers;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 /**
- * @inheritdoc
+ * Default controller for the PdfJs Module.
  * 
- * @author Die Coding (Sugeng Sulistiyawan) <diecoding@gmail.com>
- * @copyright 2020 Die Coding
- * @license MIT
- * @link https://www.diecoding.com
- * @version 1.0.0
+ * @link [sugeng-sulistiyawan.github.io](sugeng-sulistiyawan.github.io)
+ * @author Sugeng Sulistiyawan <sugeng.sulistiyawan@gmail.com>
+ * @copyright Copyright (c) 2023
  */
 class DefaultController extends Controller
 {
@@ -24,15 +21,17 @@ class DefaultController extends Controller
 
 	/**
 	 * Renders the index view for the module
+	 * 
 	 * @return string
 	 */
 	public function actionIndex()
 	{
 		/** @var \diecoding\pdfjs\Module $module */
 		$module    = $this->module;
+		$title     = $module->title;
 		$buttons   = $module->buttons;
 		$waterMark = $module->waterMark;
-		if (Yii::$app->request->isPost) {
+		if (Yii::$app->request->getIsPost()) {
 
 			$widgetButtonConfig = Yii::$app->request->post();
 			if (isset(Yii::$app->request->csrfParam)) {
@@ -42,10 +41,11 @@ class DefaultController extends Controller
 			foreach ($widgetButtonConfig as $key => $value) {
 				$widgetButtonConfig[$key] = trim($value) == '0' ? false : true;
 			}
-			$buttons = ArrayHelper::merge($buttons, $widgetButtonConfig);
+			$buttons = array_merge($buttons, $widgetButtonConfig);
 		}
 
 		return $this->render('index', [
+			'title'     => $title,
 			'buttons'   => $buttons,
 			'waterMark' => $waterMark,
 		]);

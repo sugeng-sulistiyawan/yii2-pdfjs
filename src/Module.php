@@ -2,8 +2,6 @@
 
 namespace diecoding\pdfjs;
 
-use yii\helpers\ArrayHelper;
-
 /**
  * PdfJs Module.
  * 
@@ -14,14 +12,17 @@ use yii\helpers\ArrayHelper;
 class Module extends \yii\base\Module
 {
 	/**
-	 *
-	 * @var array $buttons
+	 * @var string
+	 */
+	public $title = 'PDF.js viewer';
+
+	/**
+	 * @var array
 	 */
 	public $buttons = [];
 
 	/**
-	 *
-	 * @var array $waterMark
+	 * @var array
 	 */
 	public $waterMark = [];
 
@@ -37,25 +38,23 @@ class Module extends \yii\base\Module
 	{
 		parent::init();
 
-		$waterMarkDefault = [
-			'text'  => '',
-			'alpha' => '0.5',
-			'color' => 'red'
-		];
-
-		if (!empty($this->waterMark)) {
-			$this->waterMark = ArrayHelper::merge($waterMarkDefault, $this->waterMark);
-		} else {
-			$this->waterMark = $waterMarkDefault;
-		}
-
-		$this->buttons = ArrayHelper::merge([
+		$buttonsDefault = [
 			'presentationMode'       => true,
 			'openFile'               => true,
 			'print'                  => true,
 			'download'               => true,
 			'viewBookmark'           => true,
 			'secondaryToolbarToggle' => true,
-		], $this->buttons);
+		];
+
+		$this->buttons   = array_merge($buttonsDefault, $this->buttons);
+
+		$waterMarkDefault = [
+			'text'  => '',
+			'alpha' => '0.5',
+			'color' => 'red'
+		];
+
+		$this->waterMark = array_merge($waterMarkDefault, $this->waterMark);
 	}
 }

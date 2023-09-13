@@ -3,9 +3,11 @@
 namespace diecoding\pdfjs;
 
 use yii\web\AssetBundle;
+use yii\web\View;
 
 /**
  * PdfJsAsset represents a collection of asset files, such as CSS, JS, images.
+ * @see https://mozilla.github.io/pdf.js/getting_started/ for assets information
  * 
  * @link [sugeng-sulistiyawan.github.io](sugeng-sulistiyawan.github.io)
  * @author Sugeng Sulistiyawan <sugeng.sulistiyawan@gmail.com>
@@ -16,21 +18,31 @@ class PdfJsAsset extends AssetBundle
     /**
      * @var string
      */
-    public $sourcePath = '@bower/pdfjs-dist/web';
+    public $sourcePath = __DIR__ . '/assets';
 
     /**
      * @var array
      */
     public $css = [
-        'web/pdf_viewer.css',
+        'web/debugger.css',
+        'web/viewer.css',
     ];
 
     /**
      * @var array
      */
     public $js = [
-        'build/pdf.min.js',
-        'web/pdf_viewer.js',
+        'build/pdf.js',
+        'build/pdf.worker.js',
+        // 'web/debugger.js',
+        'web/viewer.js'
+    ];
+
+    /**
+     * @var array
+     */
+    public $jsOptions  = [
+        'position' => View::POS_HEAD,
     ];
 
     /**
@@ -41,12 +53,13 @@ class PdfJsAsset extends AssetBundle
     ];
 
     /**
-     * @var array $jsOptions
+     * @var array
      */
     public $publishOptions  = [
-        'only' => [
-            'build',
-            'web',
-        ]
+        // 'only' => [
+        //     'build',
+        //     'web',
+        // ],
+        // 'forceCopy' => true,
     ];
 }

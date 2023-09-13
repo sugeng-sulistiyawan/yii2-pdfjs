@@ -1,14 +1,15 @@
 <?php
-/* @var $this \yii\web\View */
-/* @var $content string */
 
-use yii\helpers\Html;
-use yii\web\View;
-use yii\helpers\Url;
 use diecoding\pdfjs\PdfJsAsset;
+use yii\helpers\Html;
+
+/** @var \yii\web\View $this */
+/** @var string $content */
 
 $bundle = PdfJsAsset::register($this);
+
 ?>
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <!--
@@ -32,22 +33,21 @@ Adobe CMap resources are covered by their own copyright but the same license:
 
 See https://github.com/adobe-type-tools/cmap-resources
 -->
-<html dir="ltr" mozdisallowselectionprint moznomarginboxes>
+<html dir="ltr" mozdisallowselectionprint>
 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="google" content="notranslate">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PDF.js viewer</title>
+	<title><?= Html::encode($this->title) ?></title>
+
 	<!-- This snippet is used in production (included from viewer.html) -->
-	<script type="text/javascript">
-		var WORKER_URL = "<?= $bundle->baseUrl ?>/build/pdf.worker.min.js";
-	</script>
+	<link rel="resource" type="application/l10n" href="<?= $bundle->baseUrl ?>/web/locale/locale.properties">
+
 	<?php $this->head() ?>
 </head>
 
-<body tabindex="1" class="loadingInProgress">
+<body tabindex="1">
 	<?php $this->beginBody() ?>
 	<?= $content ?>
 	<?php $this->endBody() ?>

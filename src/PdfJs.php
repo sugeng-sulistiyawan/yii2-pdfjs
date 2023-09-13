@@ -4,7 +4,6 @@ namespace diecoding\pdfjs;
 
 use Yii;
 use yii\base\Widget;
-use yii\helpers\ArrayHelper;
 
 /**
  * PdfJs is the class for widgets.
@@ -26,6 +25,21 @@ class PdfJs extends Widget
 	public $url;
 
 	/**
+	 * @var string
+	 */
+	public $width = '100%';
+
+	/**
+	 * @var string
+	 */
+	public $height = '500px';
+
+	/**
+	 * @var string
+	 */
+	public $background = '#404040';
+
+	/**
 	 * @var array
 	 */
 	public $options = [];
@@ -42,11 +56,10 @@ class PdfJs extends Widget
 	{
 		parent::init();
 
-		$this->view->registerAssetBundle(PdfJsAsset::class);
-
+		/** @var Module $module */
 		$module        = Yii::$app->getModule($this->moduleId);
 		$buttons       = $module->buttons;
-		$this->buttons = ArrayHelper::merge($buttons, $this->buttons);
+		$this->buttons = array_merge($buttons, $this->buttons);
 	}
 
 	/**
@@ -54,11 +67,18 @@ class PdfJs extends Widget
 	 */
 	public function run()
 	{
+		if (!array_key_exists('style', $this->options)) {
+			$this->options['style']['background-color'] = $this->background;
+			$this->options['style']['width']            = $this->width;
+			$this->options['style']['height']           = $this->height;
+		}
+
 		return $this->render('viewer', [
-			'options' => $this->options,
-			'url'     => $this->url,
-			'buttons' => $this->buttons,
-			'id'      => $this->id
+			'id'       => $this->id,
+			'moduleId' => $this->moduleId,
+			'url'      => $this->url,
+			'options'  => $this->options,
+			'buttons'  => $this->buttons,
 		]);
 	}
 }
