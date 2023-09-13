@@ -15,15 +15,15 @@ use yii\widgets\ActiveForm;
 $url = Url::to(["/{$moduleId}", 'file' => Url::to($url, true)], true);
 
 $this->registerJs(<<< JS
-	$("#pdfjs-form-{$id}").submit();
+	$("#{$moduleId}-form-{$id}").submit();
 JS);
 
 $form = ActiveForm::begin([
-	'id'      => "pdfjs-form-{$id}",
+	'id'      => "{$moduleId}-form-{$id}",
 	'action'  => $url,
 	'options' => [
 		'class'  => 'form-horizontal',
-		'target' => "pdfjs-{$id}",
+		'target' => "{$moduleId}-{$id}",
 	],
 ]);
 
@@ -37,7 +37,7 @@ echo Html::tag(
 	'iframe',
 	'',
 	ArrayHelper::merge([
-		'id'   => "pdfjs-{$id}",
-		'name' => "pdfjs-{$id}",
+		'id'   => "{$moduleId}-{$id}",
+		'name' => "{$moduleId}-{$id}",
 	], $options)
 );
