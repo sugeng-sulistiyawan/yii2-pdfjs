@@ -33,13 +33,13 @@ Previewer PDF File with PDF.js for Yii2
 Package is available on [Packagist](https://packagist.org/packages/diecoding/yii2-pdfjs), you can install it using [Composer](https://getcomposer.org).
 
 ```shell
-composer require diecoding/yii2-pdfjs "^1.0"
+composer require diecoding/yii2-pdfjs '^1.0'
 ```
 
 or add to the require section of your `composer.json` file.
 
 ```shell
-"diecoding/yii2-pdfjs": "^1.0"
+'diecoding/yii2-pdfjs': '^1.0'
 ```
 
 ## Dependencies
@@ -56,7 +56,7 @@ or add to the require section of your `composer.json` file.
 
 'modules'=>[
   'pdfjs' => [
-       'class' => 'diecoding\pdfjs\Module',
+       'class' => \diecoding\pdfjs\Module::class,
    ],
 ],
 ...
@@ -76,7 +76,7 @@ use yii\helpers\Url;
 ?>
 
 <?php echo PdfJs::widget([
-    "url" => Url::to(["/uploads/File.pdf"], true),
+    'url' => '@web/uploads/dummy.pdf',
 ]); ?>
 
 ```
@@ -91,12 +91,12 @@ use yii\bootstrap\Modal;
 use yii\helpers\Url;
 
 Modal::begin([
-    "header"       => "<h2>Hello, World!</h2>",
-    "toggleButton" => ["label" => "Lihat File"],
+    'header'       => '<h2>Hello, World!</h2>',
+    'toggleButton' => ['label' => 'Lihat File'],
 ]);
 
 echo PdfJs::widget([
-    "url" => Url::to(["/uploads/File.pdf"], true),
+    'url' => '@web/uploads/dummy.pdf',
 ]);
 
 Modal::end();
@@ -114,7 +114,7 @@ use yii\helpers\Url;
 
 ?>
 
-<?php echo Url::to(["/pdfjs", "file" => "/uploads/File.pdf"], true) ?>
+<?php echo Url::to(["/pdfjs", 'file' => Url::to('@web/uploads/dummy.pdf', true)], true) ?>
 
 ?>
 ```
@@ -130,11 +130,10 @@ use yii\helpers\Url;
 ?>
 
 <?php echo PdfJs::widget([
-    "url"     => Url::to(["/uploads/File.pdf"], true),
-    "options" => [
-        "width"       => "100%",
-        "height"      => "360",
-        "frameborder" => "0",
+    'url'     => '@web/uploads/dummy.pdf',
+    'options' => [
+        'width'  => '100%',
+        'height' => '360',
     ]
 ]); ?>
 
@@ -151,14 +150,14 @@ use yii\helpers\Url;
 ?>
 
 <?php echo PdfJs::widget([
-    "url"     => Url::to(["/uploads/File.pdf"], true),
-    "buttons" => [
-        "presentationMode"       => false,
-        "openFile"               => false,
-        "print"                  => false,
-        "download"               => false,
-        "viewBookmark"           => false,
-        "secondaryToolbarToggle" => false
+    'url'     => Url::to(['/uploads/File.pdf'], true),
+    'buttons' => [
+        'presentationMode'       => false,
+        'openFile'               => false,
+        'print'                  => false,
+        'download'               => false,
+        'viewBookmark'           => false,
+        'secondaryToolbarToggle' => false
     ]
 ]); ?>
 
@@ -171,7 +170,7 @@ use yii\helpers\Url;
 
 'modules'=>[
   'pdfjs' => [
-       'class'     => 'diecoding\pdfjs\Module',
+       'class'     => \diecoding\pdfjs\Module::class,
        'waterMark' => [
             'text'  => 'Yii2 PDF.js',
             'color' => 'blue',

@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 /** @var array $options */
 /** @var array $buttons */
 
-$url = Url::to(["/{$moduleId}", 'file' => Url::to($url)]);
+$url = Url::to(["/{$moduleId}", 'file' => Url::to($url, true)], true);
 
 $this->registerJs(<<< JS
 	$("#pdfjs-form-{$id}").submit();
