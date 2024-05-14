@@ -1,42 +1,45 @@
 <?php
 
-use yii\helpers\Html;
-use yii\helpers\Url;
+use diecoding\pdfjs\Module;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var \yii\web\View $this */
-/** @var string $id */
-/** @var string $moduleId */
 /** @var string $url */
+/** @var string $title */
+/** @var string $widgetId */
+/** @var Module $module */
 /** @var array $options */
 /** @var array $sections */
 
-$url = Url::to(["/{$moduleId}", 'file' => Url::to($url, true)], true);
+$moduleId = $module->id;
 
-$this->registerJs(<<< JS
-	$("#{$moduleId}-form-{$id}").submit();
+$this->registerJs(<<<JS
+	$("#{$moduleId}-form-{$widgetId}").submit();
 JS);
 
 $form = ActiveForm::begin([
-	'id'      => "{$moduleId}-form-{$id}",
-	'action'  => $url,
+	'id' => "{$moduleId}-form-{$widgetId}",
+	'action' => ["/{$moduleId}", 'file' => $url],
 	'options' => [
-		'target' => "{$moduleId}-{$id}",
+		'target' => "{$moduleId}-iframe-{$widgetId}",
 	],
 ]);
 
-foreach ($sections as $sectionId => $show) {
-	echo $show ? '' : Html::hiddenInput($sectionId, 0);
+Html::hiddenInput('title', $title);
+
+foreach ($sections as $section => $show) {
+	echo $show ? '' : Html::hiddenInput($section, 0);
 }
 
 ActiveForm::end();
 
 echo Html::tag(
-	'iframe',
+	"iframe",
 	'',
 	ArrayHelper::merge([
-		'id'   => "{$moduleId}-{$id}",
-		'name' => "{$moduleId}-{$id}",
+		'id' => "{$moduleId}-iframe-{$widgetId}",
+		'name' => "{$moduleId}-iframe-{$widgetId}",
 	], $options)
 );

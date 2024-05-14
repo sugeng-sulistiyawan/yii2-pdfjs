@@ -3,7 +3,10 @@
 namespace diecoding\pdfjs;
 
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\base\Widget;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /**
  * PdfJs is the class for widgets.
@@ -15,11 +18,6 @@ use yii\base\Widget;
 class PdfJs extends Widget
 {
 	/**
-	 * @var string Module ID for your config
-	 */
-	public $moduleId = 'pdfjs';
-
-	/**
 	 * @var string
 	 */
 	public $url;
@@ -27,17 +25,7 @@ class PdfJs extends Widget
 	/**
 	 * @var string
 	 */
-	public $width = '100%';
-
-	/**
-	 * @var string
-	 */
-	public $height = '500px';
-
-	/**
-	 * @var string
-	 */
-	public $background = 'rgba(212, 212, 215, 1)';
+	public $title;
 
 	/**
 	 * @var array
@@ -46,22 +34,39 @@ class PdfJs extends Widget
 
 	/**
 	 * Show or hide section container
+	 * Example:
+	 * 
+	 * ```php
+	 * 'sections' => [
+	 * 	 'presentationMode' => true,
+	 * 	 'print' => true,
+	 * 	 'download' => true,
+	 * 	 'secondaryToolbarToggle' => true,
+	 * ],
+	 * ```
+	 * 
+	 * This equivalent to:
+	 * ```$('#{$sectionId}').remove();```;
 	 * 
 	 * @var array
 	 */
 	public $sections = [];
 
 	/**
-	 * @inheritdoc
+	 * @return Module
+	 * @throws InvalidConfigException
 	 */
-	public function init()
+	protected function getPdfJsModule()
 	{
-		parent::init();
+		$moduleClass = Module::class;
+		foreach (Yii::$app->getModules(false) as $id => $module) {
+			$class = is_array($module) ? $module['class'] : $module::class;
+			if ($class === $moduleClass) {
+				return Yii::$app->getModule($id);
+			}
+		}
 
-		/** @var Module $module */
-		$module         = Yii::$app->getModule($this->moduleId);
-		$sections       = $module->sections;
-		$this->sections = array_merge($sections, $this->sections);
+		throw new InvalidConfigException('PDFJs module must be an application module.');
 	}
 
 	/**
@@ -69,17 +74,34 @@ class PdfJs extends Widget
 	 */
 	public function run()
 	{
-		if (!isset($this->options['style'])) {
-			$this->options['style']['background-color'] = $this->background;
-			$this->options['style']['width']            = $this->width;
-			$this->options['style']['height']           = $this->height;
+		$module = $this->getPdfJsModule();
+		$defaultOptions = $module->defaultOptions;
+		$defaultSections = $module->defaultSections;
+
+		$defaultOptions = ArrayHelper::merge($defaultOptions, [
+			'style' => [
+				'width' => '100%',
+				'height' => '480px',
+				'background-color' => 'rgba(212, 212, 215, 1)',
+				'border' => 'none',
+			],
+		]);
+
+		if (isset($this->options['style'])) {
+			$style = $this->options['style'];
+			unset($this->options['style']);
+
+			Html::addCssStyle($defaultOptions, $style);
 		}
+		$this->options = ArrayHelper::merge($defaultOptions, $this->options);
+		$this->sections = ArrayHelper::merge($defaultSections, $this->sections);
 
 		return $this->render('viewer', [
-			'id'       => $this->id,
-			'moduleId' => $this->moduleId,
-			'url'      => $this->url,
-			'options'  => $this->options,
+			'url' => $this->url,
+			'title' => $this->title,
+			'widgetId' => $this->getId(),
+			'module' => $this->getPdfJsModule(),
+			'options' => $this->options,
 			'sections' => $this->sections,
 		]);
 	}

@@ -10,7 +10,7 @@ use yii\web\Controller;
  * 
  * @link [sugeng-sulistiyawan.github.io](sugeng-sulistiyawan.github.io)
  * @author Sugeng Sulistiyawan <sugeng.sulistiyawan@gmail.com>
- * @copyright Copyright (c) 2023
+ * @copyright Copyright (c) 2024
  */
 class DefaultController extends Controller
 {
@@ -24,27 +24,24 @@ class DefaultController extends Controller
 	 * 
 	 * @return string
 	 */
-	public function actionIndex()
+	public function actionIndex($file)
 	{
-		/** @var \diecoding\pdfjs\Module $module */
-		$module   = $this->module;
-		$title    = $module->title;
-		$sections = $module->sections;
+		$title = 'PDF Viewer';
+		$sections = [];
 		if (Yii::$app->request->getIsPost()) {
-			/** @var array $widgetSections */
-			$widgetSections = Yii::$app->request->post();
-			if (isset($widgetSections[Yii::$app->request->csrfParam])) {
-				unset($widgetSections[Yii::$app->request->csrfParam]);
-			}
+			/** @var array $sections */
+			$sections = Yii::$app->request->post();
+			$title = $sections['title'] ?? 'PDF Viewer: ' . $file;
+			unset($sections[Yii::$app->request->csrfParam]);
+			unset($sections['title']);
 
-			foreach ($widgetSections as $sectionId => $show) {
-				$widgetSections[$sectionId] = $show != 0;
+			foreach ($sections as $section => $show) {
+				$sections[$section] = $show != 0;
 			}
-			$sections = array_merge($sections, $widgetSections);
 		}
 
 		return $this->render('index', [
-			'title'    => $title,
+			'title' => $title,
 			'sections' => $sections,
 		]);
 	}

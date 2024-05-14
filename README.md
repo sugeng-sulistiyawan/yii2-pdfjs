@@ -22,7 +22,7 @@ Previewer PDF File with PDF.js for Yii2
     - [Setup Module](#setup-module)
     - [Views](#views)
       - [Basic Usage](#basic-usage)
-      - [Direct Url](#direct-url)
+      - [Direct Url with Full Toolbar Section](#direct-url-with-full-toolbar-section)
       - [Custom Attribute](#custom-attribute)
       - [Disable Toolbar Section](#disable-toolbar-section)
 
@@ -70,7 +70,7 @@ echo \diecoding\pdfjs\PdfJs::widget([
 ]);
 ```
 
-#### Direct Url
+#### Direct Url with Full Toolbar Section
 
 ```php
 echo Url::to(["/pdfjs", 'file' => Url::to('@web/uploads/dummy.pdf', true)], true);
@@ -80,9 +80,13 @@ echo Url::to(["/pdfjs", 'file' => Url::to('@web/uploads/dummy.pdf', true)], true
 
 ```php
 echo \diecoding\pdfjs\PdfJs::widget([
-    'url'    => '@web/uploads/dummy.pdf',
-    'width'  => '100%',
-    'height' => '500px',
+    'url' => '@web/uploads/dummy.pdf',
+    'options' => [
+        'style' => [
+            'width' => '100%',
+            'height' => '500px',
+        ],
+    ],
 ]);
 ```
 
@@ -90,7 +94,7 @@ echo \diecoding\pdfjs\PdfJs::widget([
 
 ```php
 echo \diecoding\pdfjs\PdfJs::widget([
-    'url'      => '@web/uploads/dummy.pdf',
+    'url' => '@web/uploads/dummy.pdf',
     'sections' => [
         'toolbarContainer' => false,
     ],
