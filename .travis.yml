@@ -9,4 +9,5 @@ php:
 
 install:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - composer self-update
   - composer update --no-interaction
