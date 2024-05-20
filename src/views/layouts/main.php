@@ -44,13 +44,10 @@ See https://github.com/adobe-type-tools/cmap-resources
 
 		<!-- This snippet is used in production (included from viewer.html) -->
 		<link rel="resource" type="application/l10n" href="<?= $bundle->baseUrl ?>/web/locale/locale.json">
-
-		<!-- This snippet is used in production (included from viewer.html) -->
-		<link rel="resource" type="application/l10n" href="<?= $bundle->baseUrl ?>/web/locale/locale.json">
-		<script src="<?= $bundle->baseUrl ?>/build/pdf.mjs" type="module"></script>
-
 		<link rel="stylesheet" href="<?= $bundle->baseUrl ?>/web/viewer.css">
 
+		<script src="<?= $bundle->baseUrl ?>/build/pdf.worker.mjs" type="module"></script>
+		<script src="<?= $bundle->baseUrl ?>/build/pdf.mjs" type="module"></script>
 		<script src="<?= $bundle->baseUrl ?>/web/viewer.mjs" type="module"></script>
 
 		<?php $this->head() ?>
