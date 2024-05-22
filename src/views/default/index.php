@@ -10,7 +10,7 @@ $this->title = $title;
 $js = '';
 foreach ($sections as $section => $show) {
 	if (!$show) {
-		$js .= "$('#{$section}').remove();";
+		$js .= "$('#{$section}').hide();";
 	}
 }
 
